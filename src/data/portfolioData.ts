@@ -1,6 +1,6 @@
 import { ProjectCaseStudy, InterestItem, InternshipExperience } from '../types';
 
-export const MASCOT_IMAGE = '/src/assets/images/mascot_transparent.png';
+export const MASCOT_IMAGE = '/images/mascot_transparent.png';
 
 export const PROJECTS_DATA: ProjectCaseStudy[] = [
   {
@@ -11,7 +11,7 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
     type: 'GROUP PROJECT',
     role: 'Content Mapping & Ad Copy Development',
     year: '2026',
-    image: '/src/assets/images/project_amul_strategy_1786821845546.jpg',
+    image: '/images/projects/amul.jpg',
     overview: 'A collaborative group strategy project exploring how India’s most iconic legacy dairy brand can modernize its communication architecture for digitally native Gen Z consumers without losing its timeless emotional equity.',
     tags: ['Group Project', 'Content Strategy', 'Brand Planning', 'HHH Model', 'Ad Copies'],
     keyHighlights: [
@@ -64,7 +64,7 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
     type: 'CAMPAIGN CONCEPT',
     role: 'Creative Ideation & Campaign Concept',
     year: '2026',
-    image: '/src/assets/images/project_steelman_campaign_1786821854397.jpg',
+    image: '/images/projects/steelman.jpg',
     overview: 'A creative advertising campaign concept tackling the perception of heavy steel cupboards as outdated vintage furniture, repositioning them as heirloom statement pieces through custom repainting and modern interior aesthetic upgrades.',
     tags: ['Campaign Concept', 'Consumer Insight', 'Creative Direction', 'Visual Concept', 'Repositioning'],
     keyHighlights: [
@@ -117,7 +117,7 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
     type: 'BRAND + MARKETING STRATEGY',
     role: 'Brand Identity, Taglines & Marketing Direction',
     year: '2026',
-    image: '/src/assets/images/project_skintown_clinic_1786821864853.jpg',
+    image: '/images/projects/skintown.jpg',
     overview: 'A complete branding and modern marketing strategy for an aesthetic dermatology clinic, developing distinct brand positioning, taglines, visual identity assets, and an authentic doctor-led influencer marketing roadmap.',
     tags: ['Brand Strategy', 'Tagline Creation', 'Visual Identity', 'Influencer Selection', 'Marketing Direction'],
     keyHighlights: [
