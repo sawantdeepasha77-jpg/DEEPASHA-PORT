@@ -1,12 +1,9 @@
 {
   "framework": "vite",
+  "cleanUrls": true,
   "rewrites": [
     {
-      "source": "/images/(.*)",
-      "destination": "/images/$1"
-    },
-    {
-      "source": "/(.*)",
+      "source": "/((?!assets/|images/|.*\\..*).*)",
       "destination": "/index.html"
     }
   ]
