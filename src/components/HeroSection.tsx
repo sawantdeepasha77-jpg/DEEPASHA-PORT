@@ -98,6 +98,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onExploreClick }) => {
                 referrerPolicy="no-referrer"
                 className="h-full w-full object-contain filter drop-shadow-[0_8px_30px_rgba(147,51,234,0.22)]"
                 loading="eager"
+                onError={(e) => {
+                  const target = e.currentTarget;
+                  if (target.src.indexOf('/images/mascot.png') === -1) {
+                    target.src = '/images/mascot.png';
+                  }
+                }}
               />
             </div>
           </motion.div>

@@ -84,6 +84,12 @@ export const ContactSection: React.FC = () => {
                 alt="Deepasha Sawant Mascot"
                 referrerPolicy="no-referrer"
                 className="h-full w-full object-contain filter drop-shadow-[0_8px_30px_rgba(147,51,234,0.2)]"
+                onError={(e) => {
+                  const target = e.currentTarget;
+                  if (target.src.indexOf('/images/mascot.png') === -1) {
+                    target.src = '/images/mascot.png';
+                  }
+                }}
               />
             </div>
             <p className="mt-2 text-center font-mono text-xs text-zinc-400">
