@@ -90,13 +90,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onExploreClick }) => {
             transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
             className="relative -mt-6 sm:-mt-10 md:-mt-16 lg:-mt-22 z-20 flex items-center justify-center pointer-events-none"
           >
-            <div className="relative w-40 sm:w-52 md:w-64 lg:w-76 aspect-square">
+            <div className="relative w-40 sm:w-52 md:w-64 lg:w-76 aspect-square overflow-hidden flex items-start justify-center">
               <img
                 id="hero-mascot-image"
                 src={MASCOT_IMAGE}
                 alt="Deepasha Sawant — TYBBA student mascot portrait"
                 referrerPolicy="no-referrer"
-                className="h-full w-full object-contain filter drop-shadow-[0_8px_30px_rgba(147,51,234,0.22)]"
+                className="h-[185%] w-[185%] max-w-none object-contain object-top -translate-y-[2%] filter drop-shadow-[0_8px_30px_rgba(147,51,234,0.22)]"
                 loading="eager"
                 onError={(e) => {
                   const target = e.currentTarget;
