@@ -21,6 +21,7 @@ import { ContactPage } from './pages/ContactPage';
 
 import { PageView } from './types';
 import { PROJECTS_DATA } from './data/portfolioData';
+import { trackPageView } from './utils/analytics';
 
 export default function App() {
   const [currentView, setCurrentView] = useState<PageView>('home');
@@ -53,6 +54,33 @@ export default function App() {
     window.addEventListener('popstate', handleHashChange);
     return () => window.removeEventListener('popstate', handleHashChange);
   }, []);
+
+  // Track Google Analytics page views whenever currentView or selectedProjectId changes
+  useEffect(() => {
+    let pagePath = '/';
+    let pageTitle = 'Deepasha Sawant — Digital Business, Marketing & Creative Portfolio';
+
+    if (currentView === 'about') {
+      pagePath = '/#about';
+      pageTitle = 'About Me — Deepasha Sawant';
+    } else if (currentView === 'experience') {
+      pagePath = '/#experience';
+      pageTitle = 'Agency Experience — Deepasha Sawant';
+    } else if (currentView === 'work') {
+      pagePath = '/#work';
+      pageTitle = 'Selected Case Studies — Deepasha Sawant';
+    } else if (currentView === 'case-study') {
+      const proj = PROJECTS_DATA.find((p) => p.id === selectedProjectId) || PROJECTS_DATA[0];
+      pagePath = `/#case-study/${proj.id}`;
+      pageTitle = `${proj.title} Case Study — Deepasha Sawant`;
+    } else if (currentView === 'contact') {
+      pagePath = '/#contact';
+      pageTitle = 'Contact & Collaborate — Deepasha Sawant';
+    }
+
+    document.title = pageTitle;
+    trackPageView(pagePath, pageTitle);
+  }, [currentView, selectedProjectId]);
 
   const navigateTo = (view: PageView, projectId?: string) => {
     setCurrentView(view);
