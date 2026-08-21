@@ -16,7 +16,7 @@ export const ThreeScene: React.FC = () => {
       0.1,
       1000
     );
-    camera.position.z = 18;
+    camera.position.z = 20;
 
     const renderer = new THREE.WebGLRenderer({
       alpha: true,
@@ -27,74 +27,99 @@ export const ThreeScene: React.FC = () => {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     container.appendChild(renderer.domElement);
 
-    // Subtle lighting - soft purple & silver highlights
-    const ambientLight = new THREE.AmbientLight(0x1a1226, 2.5);
+    // Dynamic Lighting - purple, lavender, iridescent accents
+    const ambientLight = new THREE.AmbientLight(0x180c28, 2.8);
     scene.add(ambientLight);
 
-    const purpleLight1 = new THREE.PointLight(0xa855f7, 50, 50);
-    purpleLight1.position.set(10, 8, 10);
+    const purpleLight1 = new THREE.PointLight(0xa855f7, 45, 60);
+    purpleLight1.position.set(12, 10, 12);
     scene.add(purpleLight1);
 
-    const purpleLight2 = new THREE.PointLight(0x7c3aed, 40, 40);
-    purpleLight2.position.set(-10, -6, 8);
-    scene.add(purpleLight2);
+    const fuchsiaLight = new THREE.PointLight(0xd946ef, 35, 50);
+    fuchsiaLight.position.set(-12, -8, 10);
+    scene.add(fuchsiaLight);
 
-    const topWhiteLight = new THREE.DirectionalLight(0xffffff, 1.2);
-    topWhiteLight.position.set(0, 12, 10);
-    scene.add(topWhiteLight);
+    const cyanAccent = new THREE.PointLight(0x818cf8, 25, 40);
+    cyanAccent.position.set(0, -12, 8);
+    scene.add(cyanAccent);
 
-    // Chrome/Iridescent Soft Materials
+    const topDirectional = new THREE.DirectionalLight(0xffffff, 1.4);
+    topDirectional.position.set(5, 15, 12);
+    scene.add(topDirectional);
+
+    // Premium 3D Physical Materials (Iridescent Chrome & Deep Glass)
     const chromePurpleMaterial = new THREE.MeshPhysicalMaterial({
-      color: 0x221338,
-      emissive: 0x120722,
+      color: 0x2e1065,
+      emissive: 0x17072e,
+      metalness: 0.9,
+      roughness: 0.12,
+      clearcoat: 1.0,
+      clearcoatRoughness: 0.08,
+      reflectivity: 0.95,
+      transmission: 0.1,
+    });
+
+    const glossyLavenderMaterial = new THREE.MeshPhysicalMaterial({
+      color: 0x581c87,
+      emissive: 0x3b0764,
+      metalness: 0.65,
+      roughness: 0.2,
+      clearcoat: 0.9,
+      clearcoatRoughness: 0.15,
+    });
+
+    const iridescentAccentMaterial = new THREE.MeshPhysicalMaterial({
+      color: 0x4338ca,
+      emissive: 0x1e1b4b,
       metalness: 0.85,
       roughness: 0.15,
       clearcoat: 1.0,
       clearcoatRoughness: 0.1,
-      reflectivity: 0.9,
-    });
-
-    const softLavenderMaterial = new THREE.MeshPhysicalMaterial({
-      color: 0x4c1d95,
-      emissive: 0x2e1065,
-      metalness: 0.6,
-      roughness: 0.25,
-      clearcoat: 0.8,
-      clearcoatRoughness: 0.2,
     });
 
     // 3D Objects Group
     const objectsGroup = new THREE.Group();
     scene.add(objectsGroup);
 
-    // 1. Floating Torus Knot (Futuristic accent, top right)
-    const torusKnotGeo = new THREE.TorusKnotGeometry(1.4, 0.45, 100, 16);
+    // 1. Floating Torus Knot (Creative Energy, top-right background)
+    const torusKnotGeo = new THREE.TorusKnotGeometry(1.6, 0.45, 120, 20);
     const torusKnot = new THREE.Mesh(torusKnotGeo, chromePurpleMaterial);
-    torusKnot.position.set(7.5, 4.5, -2);
-    torusKnot.scale.set(0.85, 0.85, 0.85);
+    torusKnot.position.set(9.5, 5.5, -4);
+    torusKnot.scale.set(0.9, 0.9, 0.9);
     objectsGroup.add(torusKnot);
 
-    // 2. Smooth Floating Capsule (Pill accent, bottom left)
-    const capsuleGeo = new THREE.CapsuleGeometry(0.8, 1.8, 16, 32);
-    const capsule = new THREE.Mesh(capsuleGeo, softLavenderMaterial);
-    capsule.position.set(-8, -4, -1);
-    capsule.rotation.z = Math.PI / 4;
-    capsule.scale.set(0.9, 0.9, 0.9);
+    // 2. 3D Rounded Phone / Card Slab (Floating on the left)
+    const cardShape = new THREE.BoxGeometry(2.4, 4.2, 0.3);
+    const cardMesh = new THREE.Mesh(cardShape, glossyLavenderMaterial);
+    cardMesh.position.set(-10.5, 2.5, -3);
+    cardMesh.rotation.set(0.3, 0.6, -0.2);
+    objectsGroup.add(cardMesh);
+
+    // 3. 3D Camera Aperture / Lens Ring (Floating bottom right)
+    const lensRingGeo = new THREE.TorusGeometry(2.0, 0.3, 30, 80);
+    const lensRing = new THREE.Mesh(lensRingGeo, iridescentAccentMaterial);
+    lensRing.position.set(10, -6, -3);
+    lensRing.rotation.set(Math.PI / 3, 0.4, 0);
+    objectsGroup.add(lensRing);
+
+    // 4. Floating 3D Capsule Pill (Creative brand token, bottom left)
+    const capsuleGeo = new THREE.CapsuleGeometry(0.85, 2.0, 16, 32);
+    const capsule = new THREE.Mesh(capsuleGeo, chromePurpleMaterial);
+    capsule.position.set(-9, -5.5, -2);
+    capsule.rotation.z = Math.PI / 3.5;
     objectsGroup.add(capsule);
 
-    // 3. Faceted Gem / Icosahedron (Top left subtle accent)
-    const icosaGeo = new THREE.IcosahedronGeometry(1.2, 0);
-    const icosa = new THREE.Mesh(icosaGeo, chromePurpleMaterial);
-    icosa.position.set(-7.5, 5, -3);
-    icosa.scale.set(0.7, 0.7, 0.7);
-    objectsGroup.add(icosa);
+    // 5. 3D Notification / Engagement Orb (Top left)
+    const sphereGeo = new THREE.SphereGeometry(1.1, 32, 32);
+    const sphere = new THREE.Mesh(sphereGeo, glossyLavenderMaterial);
+    sphere.position.set(-8, 6.5, -4);
+    objectsGroup.add(sphere);
 
-    // 4. Smooth floating ring (Bottom right accent)
-    const ringGeo = new THREE.TorusGeometry(1.6, 0.22, 24, 64);
-    const ring = new THREE.Mesh(ringGeo, softLavenderMaterial);
-    ring.position.set(8, -5, -2);
-    ring.rotation.x = Math.PI / 3;
-    objectsGroup.add(ring);
+    // 6. Subtle Floating Chrome Icosahedron (Geometric spark, center top)
+    const icosaGeo = new THREE.IcosahedronGeometry(0.9, 0);
+    const icosa = new THREE.Mesh(icosaGeo, iridescentAccentMaterial);
+    icosa.position.set(4, 7, -5);
+    objectsGroup.add(icosa);
 
     // Mouse coordinates tracking with smooth damping
     let mouseX = 0;
@@ -105,11 +130,18 @@ export const ThreeScene: React.FC = () => {
     const handleMouseMove = (e: MouseEvent) => {
       const windowHalfX = window.innerWidth / 2;
       const windowHalfY = window.innerHeight / 2;
-      mouseX = (e.clientX - windowHalfX) * 0.0008;
-      mouseY = (e.clientY - windowHalfY) * 0.0008;
+      mouseX = (e.clientX - windowHalfX) * 0.0006;
+      mouseY = (e.clientY - windowHalfY) * 0.0006;
     };
 
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
+
+    // Handle Scroll Parallax
+    let scrollY = 0;
+    const handleScroll = () => {
+      scrollY = window.scrollY * 0.003;
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
 
     // Handle Resize with ResizeObserver
     const handleResize = () => {
@@ -138,25 +170,33 @@ export const ThreeScene: React.FC = () => {
       targetX += (mouseX - targetX) * 0.05;
       targetY += (mouseY - targetY) * 0.05;
 
-      objectsGroup.rotation.y = targetX * 1.5;
-      objectsGroup.rotation.x = targetY * 1.2;
+      objectsGroup.rotation.y = targetX * 1.4;
+      objectsGroup.rotation.x = targetY * 1.1;
+      objectsGroup.position.y = -scrollY * 0.5;
 
       // Soft natural floating oscillations
-      torusKnot.rotation.x = elapsedTime * 0.25;
-      torusKnot.rotation.y = elapsedTime * 0.35;
-      torusKnot.position.y = 4.5 + Math.sin(elapsedTime * 1.2) * 0.35;
+      torusKnot.rotation.x = elapsedTime * 0.22;
+      torusKnot.rotation.y = elapsedTime * 0.32;
+      torusKnot.position.y = 5.5 + Math.sin(elapsedTime * 1.2) * 0.4;
+
+      cardMesh.rotation.y = 0.6 + Math.sin(elapsedTime * 0.8) * 0.25;
+      cardMesh.rotation.x = 0.3 + Math.cos(elapsedTime * 0.9) * 0.15;
+      cardMesh.position.y = 2.5 + Math.sin(elapsedTime * 1.0) * 0.3;
+
+      lensRing.rotation.x = Math.PI / 3 + Math.sin(elapsedTime * 0.7) * 0.2;
+      lensRing.rotation.y = elapsedTime * 0.25;
+      lensRing.position.y = -6 + Math.cos(elapsedTime * 1.3) * 0.35;
 
       capsule.rotation.x = elapsedTime * 0.2;
-      capsule.rotation.z = Math.PI / 4 + Math.sin(elapsedTime * 0.8) * 0.2;
-      capsule.position.y = -4 + Math.cos(elapsedTime * 1.1) * 0.3;
+      capsule.rotation.z = Math.PI / 3.5 + Math.sin(elapsedTime * 0.8) * 0.2;
+      capsule.position.y = -5.5 + Math.cos(elapsedTime * 1.1) * 0.3;
 
-      icosa.rotation.x = elapsedTime * 0.3;
-      icosa.rotation.y = elapsedTime * 0.2;
-      icosa.position.y = 5 + Math.sin(elapsedTime * 0.9 + 1) * 0.25;
+      sphere.position.y = 6.5 + Math.sin(elapsedTime * 1.4) * 0.3;
+      sphere.position.x = -8 + Math.cos(elapsedTime * 1.1) * 0.2;
 
-      ring.rotation.x = Math.PI / 3 + Math.sin(elapsedTime * 0.7) * 0.2;
-      ring.rotation.y = elapsedTime * 0.3;
-      ring.position.y = -5 + Math.cos(elapsedTime * 1.3) * 0.3;
+      icosa.rotation.x = elapsedTime * 0.35;
+      icosa.rotation.y = elapsedTime * 0.25;
+      icosa.position.y = 7 + Math.sin(elapsedTime * 0.9 + 1) * 0.3;
 
       renderer.render(scene, camera);
     };
@@ -165,6 +205,7 @@ export const ThreeScene: React.FC = () => {
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('scroll', handleScroll);
       resizeObserver.disconnect();
       cancelAnimationFrame(animationFrameId);
       if (container.contains(renderer.domElement)) {
@@ -172,11 +213,14 @@ export const ThreeScene: React.FC = () => {
       }
       renderer.dispose();
       torusKnotGeo.dispose();
+      cardShape.dispose();
+      lensRingGeo.dispose();
       capsuleGeo.dispose();
+      sphereGeo.dispose();
       icosaGeo.dispose();
-      ringGeo.dispose();
       chromePurpleMaterial.dispose();
-      softLavenderMaterial.dispose();
+      glossyLavenderMaterial.dispose();
+      iridescentAccentMaterial.dispose();
     };
   }, []);
 
@@ -184,7 +228,7 @@ export const ThreeScene: React.FC = () => {
     <div
       ref={containerRef}
       id="three-canvas-container"
-      className="pointer-events-none fixed inset-0 z-0 h-full w-full opacity-70 transition-opacity duration-1000"
+      className="pointer-events-none fixed inset-0 z-0 h-full w-full opacity-75 transition-opacity duration-1000"
       aria-hidden="true"
     />
   );

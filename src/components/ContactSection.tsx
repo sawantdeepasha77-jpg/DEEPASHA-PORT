@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { MASCOT_IMAGE } from '../data/portfolioData';
-import { Mail, Linkedin, Instagram, ArrowUpRight, Copy, Check, Send, Sparkles } from 'lucide-react';
+import { Mail, Linkedin, Instagram, ArrowUpRight, Copy, Check, Send, Sparkles, MessageCircle, Heart, Zap, Compass, Flame } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 export const ContactSection: React.FC = () => {
@@ -46,9 +45,9 @@ export const ContactSection: React.FC = () => {
       id="contact"
       className="relative w-full border-t border-white/[0.06] bg-[#050507] py-28 px-6 md:px-12 overflow-hidden"
     >
-      {/* Subtle purple atmospheric diffusion (No geometric circles) */}
+      {/* Subtle purple atmospheric diffusion */}
       <div
-        className="pointer-events-none absolute left-1/2 bottom-0 -translate-x-1/2 h-[450px] w-full max-w-4xl subtle-purple-diffuse opacity-70"
+        className="pointer-events-none absolute left-1/2 bottom-0 -translate-x-1/2 h-[500px] w-full max-w-4xl subtle-purple-diffuse opacity-75"
         aria-hidden="true"
       />
 
@@ -61,7 +60,7 @@ export const ContactSection: React.FC = () => {
           <span className="h-[1px] w-12 bg-purple-500/30" />
         </div>
 
-        {/* Master Copy exactly matching PRD */}
+        {/* Master Copy */}
         <div className="space-y-2">
           <p className="font-mono text-sm sm:text-base font-semibold tracking-[0.2em] text-zinc-400 uppercase">
             YOU MADE IT THIS FAR.
@@ -74,25 +73,77 @@ export const ContactSection: React.FC = () => {
           </p>
         </div>
 
-        {/* Main Grid: Mascot Cutout Integration + Contact Interactions */}
+        {/* Main Grid: 3D Creative Connect Hub + Contact Interactions */}
         <div className="mt-14 grid grid-cols-1 gap-12 lg:grid-cols-12 items-center">
-          {/* Left: Transparent Cutout Mascot (No square/rectangle/circle container) */}
+          {/* Left: 3D Interactive Creative Hub (Replacing Mascot with pure 3D design & typography) */}
           <div className="lg:col-span-5 flex flex-col items-center justify-center">
-            <div className="relative w-44 sm:w-56 md:w-68 aspect-square select-none pointer-events-none">
-              <img
-                src={MASCOT_IMAGE}
-                alt="Deepasha Sawant Mascot"
-                referrerPolicy="no-referrer"
-                className="h-full w-full object-contain filter drop-shadow-[0_8px_30px_rgba(147,51,234,0.2)]"
-                onError={(e) => {
-                  const target = e.currentTarget;
-                  if (target.src.indexOf('/images/mascot.png') === -1) {
-                    target.src = '/images/mascot.png';
-                  }
-                }}
-              />
-            </div>
-            <p className="mt-2 text-center font-mono text-xs text-zinc-400">
+            <motion.div
+              whileHover={{ y: -8, scale: 1.02 }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className="relative w-full max-w-xs rounded-3xl border border-purple-500/30 bg-gradient-to-b from-[#170B2E] via-[#0E061E] to-[#080312] p-6 shadow-[0_20px_50px_rgba(147,51,234,0.25)] backdrop-blur-xl"
+            >
+              {/* Top Bar with Live Ping */}
+              <div className="flex items-center justify-between pb-4 border-b border-white/10">
+                <div className="flex items-center gap-2">
+                  <div className="h-2.5 w-2.5 rounded-full bg-emerald-400 animate-pulse" />
+                  <span className="font-mono text-[11px] font-bold text-zinc-200">OPEN TO COLLAB</span>
+                </div>
+                <span className="rounded-full bg-purple-500/20 px-2.5 py-0.5 font-mono text-[10px] text-purple-300 border border-purple-500/30">
+                  MUMBAI / REMOTE
+                </span>
+              </div>
+
+              {/* Center 3D Floating Token Graphic */}
+              <div className="relative my-6 flex flex-col items-center justify-center py-4">
+                {/* 3D Glowing Ambient Sphere */}
+                <div className="absolute h-32 w-32 rounded-full bg-gradient-to-tr from-purple-600/40 via-fuchsia-500/30 to-indigo-600/30 blur-2xl animate-pulse" />
+
+                {/* Floating 3D Creative Badge Layer */}
+                <motion.div
+                  animate={{
+                    rotate: [0, 360],
+                  }}
+                  transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
+                  className="relative z-10 flex h-24 w-24 items-center justify-center rounded-3xl border border-white/20 bg-gradient-to-br from-purple-600 to-indigo-900 shadow-2xl shadow-purple-900/50"
+                >
+                  <Sparkles className="h-10 w-10 text-white" />
+                </motion.div>
+
+                {/* Floating Micro Notification Badges */}
+                <motion.div
+                  animate={{
+                    y: [-4, 4, -4],
+                    x: [-3, 3, -3],
+                  }}
+                  transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+                  className="absolute -top-1 -left-2 z-20 flex items-center gap-1.5 rounded-full border border-purple-400/40 bg-[#1A0B33]/90 px-3 py-1 shadow-md backdrop-blur-md"
+                >
+                  <Flame className="h-3.5 w-3.5 text-pink-400" />
+                  <span className="font-mono text-[10px] font-bold text-purple-200">BIG IDEAS</span>
+                </motion.div>
+
+                <motion.div
+                  animate={{
+                    y: [4, -4, 4],
+                    x: [3, -3, 3],
+                  }}
+                  transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
+                  className="absolute -bottom-1 -right-2 z-20 flex items-center gap-1.5 rounded-full border border-purple-400/40 bg-[#15092A]/90 px-3 py-1 shadow-md backdrop-blur-md"
+                >
+                  <Zap className="h-3.5 w-3.5 text-amber-300" />
+                  <span className="font-mono text-[10px] font-bold text-zinc-200">LET'S TALK</span>
+                </motion.div>
+              </div>
+
+              {/* Bottom Quote / Philosophy */}
+              <div className="rounded-2xl bg-white/[0.04] border border-white/10 p-3 text-center">
+                <p className="font-display text-xs font-semibold text-purple-200">
+                  "Let's make something impossible to ignore."
+                </p>
+              </div>
+            </motion.div>
+
+            <p className="mt-4 text-center font-mono text-xs text-zinc-400">
               ALWAYS EXCITED TO CHAT ABOUT BRANDS, CONTENT &amp; IDEAS.
             </p>
           </div>
@@ -105,7 +156,7 @@ export const ContactSection: React.FC = () => {
               <button
                 id="contact-email-btn"
                 onClick={handleCopyEmail}
-                className="group flex flex-col justify-between rounded-2xl border border-purple-500/30 bg-[#120B1F]/70 p-4 text-left transition-all hover:border-purple-400 hover:bg-[#1C1030]"
+                className="group flex flex-col justify-between rounded-2xl border border-purple-500/30 bg-[#120B1F]/70 p-4 text-left transition-all hover:border-purple-400 hover:bg-[#1C1030] shadow-sm hover:shadow-[0_0_20px_rgba(168,85,247,0.15)]"
               >
                 <div className="flex items-center justify-between">
                   <Mail className="h-5 w-5 text-purple-400" />
